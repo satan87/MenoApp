@@ -10,41 +10,49 @@ import CoreLocation
 
 struct BackpackView: View {
     
-    @Binding var trip: Trip
+    @Binding var bagpacks: [BagPack]
     
     var body: some View {
         
         VStack {
             
-            ForEach(trip.bagPacks, id: \.self) { bagPack in
+//            List {
                 
-                NavigationLink(destination: ItemsList(bagPack: bagPack)) {
+                ForEach(bagpacks, id: \.self) { bagPack in
                     
-                    
-                    HStack {
+                    NavigationLink(destination: ItemsList(bagPack: bagPack)) {
                         
-                        Image("\(bagPack.capacity)")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50)
+                        VStack {
+                            
+                            HStack {
+                                
+                                Image("\(bagPack.capacity)")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 50)
+                                
+                                Spacer()
+                                
+                                Text("\(bagPack.capacity.rawValue) Backpack")
+                                    .font(.title)
+                                
+                                Image(systemName: "chevron.right")
+                                
+                            }
                         
-                        Spacer()
-                        
-                        Text("\(bagPack.capacity.rawValue) Backpack")
-                            .font(.title)
-                        
-                        Image(systemName: "chevron.right")
+                            Text("\(bagPack.items.count) Items")
+                            
+                        }
+                        .padding()
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(.gray, lineWidth: 1)
+                        )
                         
                     }
-                    .padding()
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(.gray, lineWidth: 1)
-                    )
                     
                 }
-                
-            }
+//            }.listStyle(.plain)
              
         }
         
@@ -54,16 +62,7 @@ struct BackpackView: View {
 struct BackpackView_Previews: PreviewProvider {
     static var previews: some View {
         
-        BackpackView(trip: .constant(
-                            Trip(icon: "tram",
-                                 destination: "Florence",
-                                 departureDate: Date.distantPast,
-                                 returnDate: Date.distantFuture,
-                                 bagPacks: [BagPack(capacity: .L15), BagPack(capacity: .L40)],
-                                 isArchived: false,
-                                 coordinate: CLLocationCoordinate2D(latitude: 43.769, longitude: 11.255),
-                                 image: Image("Firenze")
-                                ))
+        BackpackView(bagpacks: .constant([BagPack(capacity: .L20), BagPack(capacity: .L40)])
             )
 
     }

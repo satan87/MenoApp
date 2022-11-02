@@ -10,8 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var tripViewModel: TripViewModel
-    
-    @State var selectedTrip: Trip? = nil //selects specific trip on tap
         
     @State var isPresenting: Bool = false
     
@@ -31,7 +29,7 @@ struct ContentView: View {
 
                             NavigationLink(destination: TripDetailView(trip: trip)) {
 
-                            TripRowView(trip: trip)
+                                TripRowView(trip: trip)
                             }
                         }
                         .onDelete(perform: tripViewModel.remove)
@@ -43,7 +41,7 @@ struct ContentView: View {
 
                             NavigationLink(destination: TripDetailView(trip: trip)) {
 
-                            TripRowView(trip: trip)
+                                TripRowView(trip: trip)
                             }
                         }
                         .onDelete(perform: tripViewModel.remove)

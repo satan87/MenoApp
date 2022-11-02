@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct BagPack {
+struct BagPack: Hashable {
     
+    let id = UUID()
     let capacity: BagCapacity
     var items: [Item]
     
@@ -33,14 +34,5 @@ struct BagPack {
         
         
     }
-    
-}
-
-extension BagPack: Equatable, Hashable {
-    
-    static func == (lhs: BagPack, rhs: BagPack) -> Bool {
-        lhs.capacity == rhs.capacity && lhs.items == rhs.items
-    }
-    
     
 }

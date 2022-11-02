@@ -17,9 +17,10 @@ import SwiftUI
 //import MapKit
 
 struct Trip: Identifiable {
+   
 
 //    let id = UUID()
-    var id = UUID()
+    let id = UUID()
     
     var icon: String // -> Change this to the Vehiculke enum once you created it, and rename the variable
     var destination: String

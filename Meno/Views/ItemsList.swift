@@ -13,7 +13,9 @@ import CoreLocation
 
 struct ItemsList: View {
     
-    @ State var bagPack: BagPack
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State var bagPack: BagPack
     
     var body: some View {
         
@@ -40,11 +42,17 @@ struct ItemsList: View {
                         
                     }.onTapGesture {
                         
+                        print("HERE")
+                        print(bagPack)
+                        
                         if bagPack.items.contains(item.item) {
                             bagPack.items.removeAll(where: {$0 == item.item})
                         } else {
                             bagPack.items.append(item.item)
                         }
+                        
+                        print(bagPack)
+
                         
                     }
                     
@@ -59,7 +67,7 @@ struct ItemsList: View {
             ToolbarItem {
                 
                 Button(action: {
-                                        
+                    self.presentationMode.wrappedValue.dismiss()
                 }, label: {
                     Text("Done")
                 })
@@ -70,6 +78,7 @@ struct ItemsList: View {
 
     }
 }
+
 
 struct ItemsList_Previews: PreviewProvider {
     static var previews: some View {

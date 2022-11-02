@@ -70,12 +70,15 @@ struct TripDetailView: View {
             }
             .padding()
             
-            BackpackView(trip: $trip)
+            BackpackView(bagpacks: $trip.bagPacks)
 
             Spacer()
             
+            // Be carefull with this. If you add too manby backpack the button disappear
+            
             Button {
                 print("test")
+                trip.bagPacks.append(BagPack(capacity: .L20))
             } label: {
                 Text("Add a backpack")
             }
