@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var tripViewModel: TripViewModel
+    @EnvironmentObject var tripViewModel: TripViewModel
     
     @State var selectedTrip: Trip? = nil //selects specific trip on tap
         
@@ -29,20 +29,19 @@ struct ContentView: View {
 
                         ForEach(tripViewModel.upcomingTrips) { trip in
 
-                            NavigationLink(destination: TripDetailView(tripViewModel: TripViewModel(), trip: trip)) {
+                            NavigationLink(destination: TripDetailView(trip: trip)) {
 
                             TripRowView(trip: trip)
                             }
                         }
                         .onDelete(perform: tripViewModel.remove)
                     }
-
-                    
+            
                     Section(header: Text("Where you've been"))
                     {
                         ForEach(tripViewModel.archivedTrips) { trip in
 
-                            NavigationLink(destination: TripDetailView(tripViewModel: TripViewModel(), trip: trip)) {
+                            NavigationLink(destination: TripDetailView(trip: trip)) {
 
                             TripRowView(trip: trip)
                             }
@@ -89,6 +88,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(tripViewModel: TripViewModel())
+        ContentView()
+            .environmentObject(TripViewModel())
     }
 }

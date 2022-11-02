@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3758E6092911E00A0006AD60 /* BagCapacity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758E6082911E00A0006AD60 /* BagCapacity.swift */; };
+		3758E60B2911E3260006AD60 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758E60A2911E3260006AD60 /* Item.swift */; };
+		3758E60F2911EB610006AD60 /* BagPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3758E60E2911EB610006AD60 /* BagPack.swift */; };
 		4E0639FA2907C0F900448DEB /* TripModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0639F92907C0F900448DEB /* TripModel.swift */; };
 		4E063A00290828EF00448DEB /* TripViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0639FF290828EF00448DEB /* TripViewModel.swift */; };
 		4E0A0ADF290857670086403E /* TripRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0A0ADE290857670086403E /* TripRowView.swift */; };
@@ -25,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3758E6072911DE450006AD60 /* Nicolas.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Nicolas.md; sourceTree = "<group>"; };
+		3758E6082911E00A0006AD60 /* BagCapacity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagCapacity.swift; sourceTree = "<group>"; };
+		3758E60A2911E3260006AD60 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		3758E60E2911EB610006AD60 /* BagPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BagPack.swift; sourceTree = "<group>"; };
 		4E0639F92907C0F900448DEB /* TripModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripModel.swift; sourceTree = "<group>"; };
 		4E0639FF290828EF00448DEB /* TripViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripViewModel.swift; sourceTree = "<group>"; };
 		4E0A0ADE290857670086403E /* TripRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRowView.swift; sourceTree = "<group>"; };
@@ -58,6 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				4E0639F92907C0F900448DEB /* TripModel.swift */,
+				3758E6082911E00A0006AD60 /* BagCapacity.swift */,
+				3758E60A2911E3260006AD60 /* Item.swift */,
+				3758E60E2911EB610006AD60 /* BagPack.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -89,6 +99,7 @@
 		4E3A147E290724EE0088A903 = {
 			isa = PBXGroup;
 			children = (
+				3758E6072911DE450006AD60 /* Nicolas.md */,
 				4E3A1489290724EE0088A903 /* Meno */,
 				4E3A1488290724EE0088A903 /* Products */,
 			);
@@ -195,7 +206,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E063A00290828EF00448DEB /* TripViewModel.swift in Sources */,
+				3758E60F2911EB610006AD60 /* BagPack.swift in Sources */,
 				4EE64E852911236400E3BA90 /* BackpackRow.swift in Sources */,
+				3758E6092911E00A0006AD60 /* BagCapacity.swift in Sources */,
 				4E321A9E2910261B00AAAAA5 /* BackpackView.swift in Sources */,
 				4E0A0ADF290857670086403E /* TripRowView.swift in Sources */,
 				4E332956290A9320007ABADB /* SplashScreenView.swift in Sources */,
@@ -203,6 +216,7 @@
 				4E3A148D290724EE0088A903 /* ContentView.swift in Sources */,
 				4E0A0AE129086E1B0086403E /* TripDetailView.swift in Sources */,
 				4EE64E83291070F000E3BA90 /* ToDoList.swift in Sources */,
+				3758E60B2911E3260006AD60 /* Item.swift in Sources */,
 				4E0639FA2907C0F900448DEB /* TripModel.swift in Sources */,
 				4EF962E8290FDD1B00073BD5 /* MapView.swift in Sources */,
 				4E3A148B290724EE0088A903 /* MenoApp.swift in Sources */,

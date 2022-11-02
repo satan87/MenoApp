@@ -10,21 +10,21 @@ import CoreLocation
 
 struct BackpackRow: View {
     
-    var bag: String
+    var bag: BagCapacity
     
     var body: some View {
         
         VStack{
             HStack{
                                 
-                Image("\(bag)")
+                Image("\(bag.rawValue)")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 30)
                 
                 Spacer()
                 
-                Text("\(bag)")
+                Text("\(bag.rawValue)")
                     .font(.title2)
                                 
             }
@@ -38,7 +38,7 @@ struct BackpackRow: View {
 
 struct BackpackRow_Previews: PreviewProvider {
     static var previews: some View {
-        BackpackRow(bag: "40L")
+        BackpackRow(bag: .L40)
     }
 }
 

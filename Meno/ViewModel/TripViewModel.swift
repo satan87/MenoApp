@@ -19,7 +19,7 @@ class TripViewModel: ObservableObject {
               destination: "Firenze",
               departureDate: Date.distantPast.addingTimeInterval(86400), //shitty hack
               returnDate: Date.distantFuture.addingTimeInterval(300400),
-              bagSize: "20L",
+              bagPacks: [BagPack(capacity: .L20), BagPack(capacity: .L40)],
               isArchived: true,
               coordinate: CLLocationCoordinate2D(latitude: 43.769, longitude: 11.255),
               image: Image("Firenze")
@@ -29,7 +29,7 @@ class TripViewModel: ObservableObject {
               destination: "Cornwall",
               departureDate: Date.distantPast.addingTimeInterval(9986400),
               returnDate: Date.distantFuture.addingTimeInterval(99300400),
-              bagSize: "30L",
+              bagPacks: [BagPack(capacity: .L30)],
               isArchived: true,
               coordinate: CLLocationCoordinate2D(latitude: 50.627, longitude: -4.635),
               image: Image("Cornwall")
@@ -39,7 +39,7 @@ class TripViewModel: ObservableObject {
               destination: "Sentiero Degli Dei",
               departureDate: Date.distantPast.addingTimeInterval(39986400),
               returnDate: Date.distantFuture.addingTimeInterval(40090000),
-              bagSize: "30L",
+              bagPacks: [BagPack(capacity: .L30)],
               isArchived: true,
               coordinate: CLLocationCoordinate2D(latitude: 40.621, longitude: 14.520),
               image: Image("SentieroDegliDei")
@@ -63,6 +63,14 @@ class TripViewModel: ObservableObject {
     
     
     
+    // For info, you can convert to function like this.
+    func upcomingTripsF() -> [Trip] {
+        
+        return trips.filter({!$0.isArchived})
+    }
+    
+    
+    
     var archivedTrips: [Trip] {
         
         var archivedTrips: [Trip] = []
@@ -79,8 +87,11 @@ class TripViewModel: ObservableObject {
     }
     
     
-//    func appendTrip(icon: String, destination: String, departureDate: Date, returnDate: Date, bagSize: String, isArchive: Bool) {
-//        trips.append(icon, destination, )
-//        
-//    }
+    func appendTrip(trip: Trip) {
+        
+        print(trip)
+        trips.append(trip)
+    }
+    
+    
 }

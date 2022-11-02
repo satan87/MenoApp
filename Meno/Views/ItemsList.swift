@@ -10,58 +10,51 @@
 import SwiftUI
 import CoreLocation
 
-struct MyItem: Identifiable {
-    let id = UUID()
-    let name: String
-    var isPacked: Bool
-}
 
 struct ItemsList: View {
     
-    var trip: Trip
-    
-    @State private var items = [
-        MyItem(name: "Tent", isPacked: false),
-        MyItem(name: "Sleeping bag", isPacked: false),
-        MyItem(name: "Bear spray", isPacked: false),
-        MyItem(name: "Battery pack", isPacked: false),
-        MyItem(name: "Socks", isPacked: false),
-        MyItem(name: "Shirts", isPacked: false),
-        MyItem(name: "Jacket", isPacked: false),
-        MyItem(name: "Toothbrush", isPacked: false),
-        MyItem(name: "Toothpaste", isPacked: false),
-        MyItem(name: "Soap", isPacked: false),
-        MyItem(name: "Sunglasses", isPacked: false),
-        MyItem(name: "Watch", isPacked: false),
-        MyItem(name: "GoPro", isPacked: false),
-        MyItem(name: "Earphones", isPacked: false),
-    ]
+    @ State var bagPack: BagPack
     
     var body: some View {
         
         VStack{
-            
-            Image("\(trip.bagSize)")
+        
+
+            Image("\(bagPack.capacity.rawValue)")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 50)
             
-            List($items) { $item in
+            List {
                 
-                HStack{
+                ForEach(ItemList.allCases, id: \.self) { item in
                     
-                    Image(systemName: item.isPacked ? "checkmark.circle" : "circle")
-                    
-                        .onTapGesture {
-                            item.isPacked.toggle()
+                    HStack {
+                        
+                        Image(systemName: bagPack.items.contains(item.item)
+                              ? "checkmark.circle"
+                              : "circle")
+                        
+                        Text(item.item.name)
+                        
+                        
+                    }.onTapGesture {
+                        
+                        if bagPack.items.contains(item.item) {
+                            bagPack.items.removeAll(where: {$0 == item.item})
+                        } else {
+                            bagPack.items.append(item.item)
                         }
-
-                    Text(item.name)
+                        
+                    }
+                    
+                    
                 }
+
             }
 
         }
-        .navigationTitle("Your Items for \(trip.destination)")
+        .navigationTitle("Your Items for your \(bagPack.capacity.rawValue) capacity")
         .toolbar {
             ToolbarItem {
                 
@@ -74,27 +67,12 @@ struct ItemsList: View {
             }
         }
         
-        
-        
-        
-        
-        
-        
 
     }
 }
 
 struct ItemsList_Previews: PreviewProvider {
     static var previews: some View {
-        ItemsList(trip: Trip(icon: "tram",
-                         destination: "Florence",
-                         departureDate: Date.distantPast,
-                         returnDate: Date.distantFuture,
-                         bagSize: "20L",
-                         isArchived: false,
-                         coordinate: CLLocationCoordinate2D(latitude: 43.769, longitude: 11.255),
-                         image: Image("Firenze")
-                        )
-        )
+        ItemsList(bagPack: BagPack(capacity: .L20))
     }
 }

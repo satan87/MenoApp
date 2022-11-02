@@ -78,7 +78,7 @@ struct TripRowView_Previews: PreviewProvider {
                                destination: "Which City?",
                                departureDate: Date.distantPast,
                                returnDate: Date.now,
-                               bagSize: "20L",
+                               bagPacks: [BagPack(capacity: .L20)],
                                isArchived: true,
                                coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141),
                                image: Image("Sentiero Degli Dei")

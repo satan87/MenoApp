@@ -10,49 +10,61 @@ import CoreLocation
 
 struct BackpackView: View {
     
-    var trip: Trip
+    @Binding var trip: Trip
+    
     var body: some View {
         
-        VStack{
-            HStack{
-                                
-                Image("\(trip.bagSize)")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 50)
+        VStack {
+            
+            ForEach(trip.bagPacks, id: \.self) { bagPack in
                 
-                Spacer()
+                NavigationLink(destination: ItemsList(bagPack: bagPack)) {
+                    
+                    
+                    HStack {
+                        
+                        Image("\(bagPack.capacity)")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50)
+                        
+                        Spacer()
+                        
+                        Text("\(bagPack.capacity.rawValue) Backpack")
+                            .font(.title)
+                        
+                        Image(systemName: "chevron.right")
+                        
+                    }
+                    .padding()
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(.gray, lineWidth: 1)
+                    )
+                    
+                }
                 
-                Text("\(trip.bagSize) Backpack")
-                    .font(.title)
-                
-                Image(systemName: "chevron.right")
-                                
             }
-            .padding()
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(.gray, lineWidth: 1)
-            )
+             
         }
-
-
         
     }
 }
 
 struct BackpackView_Previews: PreviewProvider {
     static var previews: some View {
-        BackpackView(trip:
-                    Trip(icon: "tram",
-                         destination: "Florence",
-                         departureDate: Date.distantPast,
-                         returnDate: Date.distantFuture,
-                         bagSize: "15L",
-                         isArchived: false,
-                         coordinate: CLLocationCoordinate2D(latitude: 43.769, longitude: 11.255),
-                         image: Image("Firenze")
-                        )
-        )
+        
+        BackpackView(trip: .constant(
+                            Trip(icon: "tram",
+                                 destination: "Florence",
+                                 departureDate: Date.distantPast,
+                                 returnDate: Date.distantFuture,
+                                 bagPacks: [BagPack(capacity: .L15), BagPack(capacity: .L40)],
+                                 isArchived: false,
+                                 coordinate: CLLocationCoordinate2D(latitude: 43.769, longitude: 11.255),
+                                 image: Image("Firenze")
+                                ))
+            )
+
     }
 }

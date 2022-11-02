@@ -14,10 +14,12 @@ struct MenoApp: App {
 //        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor : UIColor.orange]
 //    }
     
+    @ObservedObject var tripViewModel = TripViewModel()
+    
     var body: some Scene {
         WindowGroup {
 //            SplashScreenView()
-             ContentView(tripViewModel: TripViewModel())
+             ContentView().environmentObject(tripViewModel)
 //            ContentView()
         }
     }

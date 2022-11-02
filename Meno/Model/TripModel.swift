@@ -12,7 +12,6 @@ import CoreLocation
 //    case small, medium, large
 //}
 
-import Foundation
 import SwiftUI
 //import CoreLocation
 //import MapKit
@@ -20,19 +19,28 @@ import SwiftUI
 struct Trip: Identifiable {
 
 //    let id = UUID()
-    let id = UUID()
+    var id = UUID()
     
-    var icon: String
+    var icon: String // -> Change this to the Vehiculke enum once you created it, and rename the variable
     var destination: String
     var departureDate: Date
     var returnDate: Date
-    var bagSize: String //dovrebbe essere un array o enum ma non mi riusciva :(
+//    var bagSize: BagCapacity //dovrebbe essere un array o enum ma non mi riusciva :(
+    var bagPacks: [BagPack]
     var isArchived: Bool
     var coordinate: CLLocationCoordinate2D
     var image: Image
     
 //    var ItemsStore: []
 }
+
+
+func blankTrip() -> Trip {
+    return Trip(icon: "airplane", destination: "", departureDate: Date(), returnDate: Date(), bagPacks: [BagPack](), isArchived: false, coordinate: CLLocationCoordinate2D(latitude: 0, longitude: 0), image: Image("Firenze"))
+}
+
+// For the Image, you could find a default Image for blank trip.
+
 
 /*
  The purpose of the app is for the user to receive some tips on what to bring when going backpacking.

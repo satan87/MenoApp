@@ -16,31 +16,32 @@ struct NewTrip: View {
     
     @Binding var isPresenting: Bool
     
+    @State var newTrip = blankTrip()
+    
     //Temporary variables to create a new array element in the model
     //It should be possible to avoid this and just use the elements of the model but I am not sure how
-    @State private var destinationValue: String = ""
-    @State private var departureDateValue =  Date()
-    @State private var returnDateValue = Date()
+//    @State private var destinationValue: String = ""
     
-    var bags = ["20L", "30L", "40L"]
-    @State private var selectedBag = "30L"
+//    @State private var departureDateValue =  Date()
     
-    var vehicles = ["airplane", "car", "tram", "ferry"]
-    @State private var selectedVehicle = "airplane"
+//    @State private var returnDateValue = Date()
     
+//    @State private var selectedBag = BagCapacity.L30
+    
+    var vehicles = ["airplane", "car", "tram", "ferry"] // -> You need to create an enum
     
     //we could use this for something, not currently used
-    @FocusState private var destinationIsFocused: Bool
+//    @FocusState private var destinationIsFocused: Bool
     
     //resets values of text field
-    func reset() {
-        destinationValue = ""
-    }
+//    func reset() {
+//        destinationValue = ""
+//    }
     
     //returns number of seconds that the trip will take, need to convert to days somehow
     var tripLength: Int {
         
-        let delta = departureDateValue.distance(to: returnDateValue)
+        let delta = newTrip.departureDate.distance(to: newTrip.returnDate)
         return Int(delta)
     }
     
@@ -49,12 +50,14 @@ struct NewTrip: View {
         
         VStack {
             
+            Text(newTrip.destination)
+            
             VStack{
                 
                 Form{
                     //Destination (potentially a search field)
                     Section{
-                        TextField("Destination", text: $destinationValue)
+                        TextField("Destination", text: $newTrip.destination)
                     }
                 header: {
                     Text("Where to?")
@@ -68,7 +71,7 @@ struct NewTrip: View {
                             HStack{
                                 DatePicker(
                                     "Departure",
-                                    selection: $departureDateValue,
+                                    selection: $newTrip.departureDate,
                                     displayedComponents: [.date]
                                 )
                                 .datePickerStyle(.automatic)
@@ -77,7 +80,7 @@ struct NewTrip: View {
                             HStack{
                                 DatePicker(
                                     "Return",
-                                    selection: $returnDateValue,
+                                    selection: $newTrip.returnDate,
                                     displayedComponents: [.date]
                                 )
                                 .datePickerStyle(.automatic)
@@ -89,7 +92,7 @@ struct NewTrip: View {
                 }
                                                
                     Section{
-                        Picker("Choose Vehicle", selection: $selectedVehicle) {
+                        Picker("Choose Vehicle", selection: $newTrip.icon) {
                             ForEach(vehicles, id: \.self) {
                                 Image(systemName: $0)
                             }
@@ -107,14 +110,14 @@ struct NewTrip: View {
                     }
                     
                     Section{
-                        Picker("Choose Bag size", selection: $selectedBag) {
-                            
-                            ForEach(bags, id: \.self) { bag in
-                                BackpackRow(bag: bag)
-                            }
-                        }
-                        .pickerStyle(.inline)
-                        .labelsHidden()
+//                        Picker("Choose Bag size", selection: $selectedBag) {
+//
+//                            ForEach(BagCapacity.allCases, id: \.self) { bag in
+//                                BackpackRow(bag: bag)
+//                            }
+//                        }
+//                        .pickerStyle(.inline)
+//                        .labelsHidden()
 
                     }
                 header: {
@@ -129,16 +132,7 @@ struct NewTrip: View {
                     
                     Button(action: {
                         
-                        tripViewModel.trips.append(Trip(icon: selectedVehicle,
-                                                        destination: destinationValue,
-                                                        departureDate: departureDateValue,
-                                                        returnDate: returnDateValue,
-                                                        bagSize: selectedBag,
-                                                        isArchived: false,
-                                                        coordinate: CLLocationCoordinate2D(latitude: 37.800, longitude: -122.372),
-                                                        image: Image("SanFrancisco")
-                            )
-                        )
+                        tripViewModel.appendTrip(trip: newTrip)
                         isPresenting = false
                         
                     }, label: {

@@ -9,9 +9,7 @@ import MapKit
 
 struct TripDetailView: View {
     
-    @ObservedObject var tripViewModel: TripViewModel
-    
-    var trip: Trip
+    @State var trip: Trip
 
     @State private var selection: String? = nil
         
@@ -71,14 +69,9 @@ struct TripDetailView: View {
 
             }
             .padding()
+            
+            BackpackView(trip: $trip)
 
-            
-            NavigationLink(destination: ItemsList(trip: trip)) {
-              BackpackView(trip: trip)
-            }
-            .padding()
-                           
-            
             Spacer()
             
             Button {
@@ -100,12 +93,12 @@ struct TripDetailView: View {
 
 struct TripDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TripDetailView(tripViewModel: TripViewModel(), trip:
+        TripDetailView(trip:
                         Trip(icon: "tram",
                              destination: "Florence",
                              departureDate: Date.distantPast,
                              returnDate: Date.distantFuture,
-                             bagSize: "20L",
+                             bagPacks: [BagPack(capacity: .L20), BagPack(capacity: .L40)],
                              isArchived: false,
                              coordinate: CLLocationCoordinate2D(latitude: 43.769, longitude: 11.255),
                              image: Image("Firenze")
